@@ -3,6 +3,7 @@ import { PaymentService } from '../../services/payment.service';
 
 import { ProductService } from '../../services/product.service';
 import { WompiProvider } from 'src/infrastructure/providers/wompi.provider';
+import { CustomerService } from 'src/application/services/customer.service';
 
 @Injectable()
 export class ProcessPaymentUseCase {
@@ -10,6 +11,7 @@ export class ProcessPaymentUseCase {
     private readonly paymentService: PaymentService,
     private readonly wompiProvider: WompiProvider,
     private readonly productService: ProductService,
+    private readonly customerService: CustomerService,
   ) { }
 
   async execute(paymentData: {
@@ -30,6 +32,14 @@ export class ProcessPaymentUseCase {
       address,
       token,
     } = paymentData;
+
+    const customer = await this.customerService.createCustomer(
+      customerName,
+      customerEmail,
+    )
+
+    console.log('Customer created:', customer);
+
 
 
     const payment = await this.paymentService.createPayment(
