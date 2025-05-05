@@ -1,4 +1,4 @@
-# wompi-payment-backend
+# payment-backend
 
 Este proyecto es una aplicación backend para procesar pagos, construida con Nest.js y siguiendo una arquitectura hexagonal. Está diseñada para manejar operaciones de pago de manera eficiente y mantener una clara separación de responsabilidades.
 
@@ -25,7 +25,7 @@ Para comenzar con el proyecto, clona el repositorio e instala las dependencias:
 
 ```bash
 git clone https://github.com/andresmurillo13/payments-backend.git
-cd wompi-payments
+cd payments-backend
 npm install
 ```
 
