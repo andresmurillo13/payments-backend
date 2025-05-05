@@ -24,8 +24,8 @@ El proyecto está organizado en varios directorios clave:
 Para comenzar con el proyecto, clona el repositorio e instala las dependencias:
 
 ```bash
-git clone <repository-url>
-cd wompi-payment-backend
+git clone https://github.com/andresmurillo13/payments-backend.git
+cd wompi-payments
 npm install
 ```
 

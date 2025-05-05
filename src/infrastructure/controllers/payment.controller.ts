@@ -4,6 +4,7 @@ import { ProcessPaymentUseCase } from '../../application/use-cases/payments/proc
 import { GetPaymentUseCase } from '../../application/use-cases/payments/get-payment.use-case';
 import { WompiProvider } from '../providers/wompi.provider';
 import { UpdateStockUseCase } from 'src/application/use-cases/products/update-stock.use-case';
+import { CreateDeliveryUseCase } from 'src/application/use-cases/deliveries/create-delivery.use-case';
 
 @Controller('payments')
 export class PaymentController {
@@ -13,6 +14,7 @@ export class PaymentController {
     private readonly getPaymentByIdUseCase: GetPaymentUseCase,
     private readonly wompiProvider: WompiProvider,
     private readonly updateStockUseCase: UpdateStockUseCase,
+    private readonly createDeliveryUseCase: CreateDeliveryUseCase,
   ) { }
 
 
@@ -42,13 +44,21 @@ export class PaymentController {
       return 'Payment not found';
     }
 
-   
+
     if (status === 'APPROVED') {
       const payment = await this.paymentService.getPayment(reference);
       await this.updateStockUseCase.execute(
         payment.productId,
         1
       );
+
+      const delivery = await this.createDeliveryUseCase.execute({
+        paymentId: reference,
+        customerId: payment.customerName,
+        deliveryAddress: payment.address,
+        deliveryDate: new Date(),
+      });
+      console.log('Delivery created:', delivery);
     }
 
     return 'Webhook processed';

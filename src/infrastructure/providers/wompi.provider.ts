@@ -108,13 +108,13 @@ export class WompiProvider {
             .createHmac('sha256', this.privateKey)
             .update(JSON.stringify(payload))
             .digest('hex');
-        // console.log(
-        //     'Firma esperada:',
-        //     crypto
-        //         .createHmac('sha256', this.privateKey)
-        //         .update(JSON.stringify(payload))
-        //         .digest('hex')
-        // );
+        console.log(
+            'Firma esperada:',
+            crypto
+                .createHmac('sha256', this.privateKey)
+                .update(JSON.stringify(payload))
+                .digest('hex')
+        );
         return expected === signature;
     }
 }

@@ -16,7 +16,7 @@ export class ProcessPaymentUseCase {
 
   async execute(paymentData: {
     amount: number;
-    paymentMethod: string; // 'CARD'
+    paymentMethod: string; 
     productId: string;
     customerEmail: string;
     customerName: string;
@@ -38,9 +38,7 @@ export class ProcessPaymentUseCase {
       customerEmail,
     )
 
-    console.log('Customer created:', customer);
-
-
+   
 
     const payment = await this.paymentService.createPayment(
       amount,
@@ -51,12 +49,10 @@ export class ProcessPaymentUseCase {
       address,
     );
 
-    console.log('Payment created:', payment);
-
 
     const { acceptanceToken } = await this.wompiProvider.getAcceptanceToken();
 
-    console.log('Acceptance Token:', acceptanceToken);
+   
 
     const wompiResponse = await this.wompiProvider.createCardTransaction({
       amountInCents: amount * 100,
@@ -67,7 +63,7 @@ export class ProcessPaymentUseCase {
       redirectUrl: 'https://tuapp.com/payment-result',
 
     });
-    console.log('Wompi Response:', wompiResponse);
+   
 
     const transactionStatus = wompiResponse.data.status;
 
