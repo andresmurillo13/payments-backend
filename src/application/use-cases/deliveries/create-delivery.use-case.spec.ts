@@ -24,14 +24,14 @@ describe('CreateDeliveryUseCase', () => {
     });
 
     it('should create a delivery successfully', async () => {
-        // Arrange
+       
         const deliveryData = { id: 'delivery-123', address: '123 Main St', status: 'PENDING' };
         deliveryService.createDelivery.mockResolvedValue(deliveryData);
 
-        // Act
+    
         const result = await createDeliveryUseCase.execute(deliveryData);
 
-        // Assert
+       
         expect(result).toEqual(deliveryData);
         expect(deliveryService.createDelivery).toHaveBeenCalledWith(deliveryData);
         expect(deliveryService.createDelivery).toHaveBeenCalledTimes(1);

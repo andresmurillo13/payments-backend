@@ -24,14 +24,14 @@ describe('GetAllProductsUseCase', () => {
   });
 
   it('should return all products', async () => {
-    // Arrange
+   
     const mockProducts = [{ id: '1', name: 'Product 1' }, { id: '2', name: 'Product 2' }];
     productService.findAll.mockResolvedValue(mockProducts);
 
-    // Act
+   
     const result = await getAllProductsUseCase.execute();
 
-    // Assert
+   
     expect(result).toEqual(mockProducts);
     expect(productService.findAll).toHaveBeenCalledTimes(1);
   });

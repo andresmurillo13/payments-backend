@@ -24,14 +24,13 @@ describe('UpdateStockUseCase', () => {
     });
 
     it('should update the stock of a product', async () => {
-        // Arrange
+   
         const productId = 'product-123';
         const quantity = 5;
 
-        // Act
+     
         await updateStockUseCase.execute(productId, quantity);
 
-        // Assert
         expect(productService.updateStock).toHaveBeenCalledWith(productId, -Math.abs(quantity));
         expect(productService.updateStock).toHaveBeenCalledTimes(1);
     });

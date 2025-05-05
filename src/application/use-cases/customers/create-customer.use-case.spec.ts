@@ -24,7 +24,7 @@ describe('CreateCustomerUseCase', () => {
   });
 
   it('should create a customer successfully', async () => {
-    // Arrange
+
     const name = 'John Doe';
     const email = 'john.doe@example.com';
     const mockCustomer = { 
@@ -37,10 +37,10 @@ describe('CreateCustomerUseCase', () => {
     };
     customerService.createCustomer.mockResolvedValue(mockCustomer);
 
-    // Act
+ 
     const result = await createCustomerUseCase.execute(name, email);
 
-    // Assert
+   
     expect(result).toEqual(mockCustomer);
     expect(customerService.createCustomer).toHaveBeenCalledWith(name, email);
     expect(customerService.createCustomer).toHaveBeenCalledTimes(1);

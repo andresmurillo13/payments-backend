@@ -24,7 +24,7 @@ describe('GetPaymentUseCase', () => {
   });
 
   it('should return a payment by ID', async () => {
-    // Arrange
+  
     const paymentId = 'payment-123';
     const mockPayment = { 
       id: paymentId, 
@@ -38,10 +38,10 @@ describe('GetPaymentUseCase', () => {
     };
     paymentService.getPayment.mockResolvedValue(mockPayment);
 
-    // Act
+ 
     const result = await getPaymentUseCase.execute(paymentId);
 
-    // Assert
+   
     expect(result).toEqual(mockPayment);
     expect(paymentService.getPayment).toHaveBeenCalledWith(paymentId);
     expect(paymentService.getPayment).toHaveBeenCalledTimes(1);

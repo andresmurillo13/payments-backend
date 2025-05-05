@@ -52,7 +52,7 @@ describe('ProcessPaymentUseCase', () => {
     });
 
     it('should process a payment successfully', async () => {
-        // Arrange
+      
         const paymentData = {
             amount: 100,
             paymentMethod: 'CARD',
@@ -67,7 +67,7 @@ describe('ProcessPaymentUseCase', () => {
             id: 'customer-123',
             fullName: paymentData.customerName,
             email: paymentData.customerEmail,
-            phone: '1234567890', // Add a mock phone number
+            phone: '1234567890', 
             ...paymentData,
         };
         const mockPayment = { id: 'payment-123', ...paymentData, status: 'PENDING' };
@@ -85,10 +85,10 @@ describe('ProcessPaymentUseCase', () => {
         wompiProvider.getAcceptanceToken.mockResolvedValue(mockAcceptanceToken);
         wompiProvider.createCardTransaction.mockResolvedValue(mockWompiResponse);
 
-        // Act
+      
         const result = await processPaymentUseCase.execute(paymentData);
 
-        // Assert
+     
         expect(customerService.createCustomer).toHaveBeenCalledWith(
             paymentData.customerName,
             paymentData.customerEmail,
@@ -124,7 +124,7 @@ describe('ProcessPaymentUseCase', () => {
     });
 
     it('should throw an error if acceptance token retrieval fails', async () => {
-        // Arrange
+      
         const paymentData = {
             amount: 100,
             paymentMethod: 'CARD',
@@ -139,13 +139,13 @@ describe('ProcessPaymentUseCase', () => {
             id: 'customer-123',
             fullName: paymentData.customerName,
             email: paymentData.customerEmail,
-            phone: '1234567890', // Add a mock phone number
+            phone: '1234567890',
             ...paymentData,
         });
         paymentService.createPayment.mockResolvedValue({ id: 'payment-123', ...paymentData, status: 'PENDING' });
         wompiProvider.getAcceptanceToken.mockRejectedValue(new Error('Failed to get acceptance token'));
 
-        // Act & Assert
+      
         await expect(processPaymentUseCase.execute(paymentData)).rejects.toThrow(
             'Failed to get acceptance token',
         );
